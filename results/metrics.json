@@ -1,0 +1,83 @@
+[
+  {
+    "Model":"Global Mean",
+    "Paradigm":"Baseline",
+    "RMSE":1.1634128466,
+    "Precision@10":null,
+    "Recall@10":null,
+    "NDCG@10":null,
+    "HitRate@10":null
+  },
+  {
+    "Model":"Popularity",
+    "Paradigm":"Heuristic",
+    "RMSE":0.9925165151,
+    "Precision@10":0.0352153778,
+    "Recall@10":0.0413003266,
+    "NDCG@10":0.0451304056,
+    "HitRate@10":0.227904588
+  },
+  {
+    "Model":"Biased SVD (MF)",
+    "Paradigm":"Explicit",
+    "RMSE":0.8934761307,
+    "Precision@10":0.0306675844,
+    "Recall@10":0.0354771353,
+    "NDCG@10":0.0409610718,
+    "HitRate@10":0.2093701661
+  },
+  {
+    "Model":"Implicit ALS (MF)",
+    "Paradigm":"Implicit",
+    "RMSE":null,
+    "Precision@10":0.0461815707,
+    "Recall@10":0.0711239949,
+    "NDCG@10":0.0665076524,
+    "HitRate@10":0.3195469379
+  },
+  {
+    "Model":"GMF",
+    "Paradigm":"Implicit",
+    "RMSE":null,
+    "Precision@10":0.0544190891,
+    "Recall@10":0.0756621212,
+    "NDCG@10":0.0776794851,
+    "HitRate@10":0.3406555653
+  },
+  {
+    "Model":"MLP",
+    "Paradigm":"Implicit",
+    "RMSE":null,
+    "Precision@10":0.0552599952,
+    "Recall@10":0.0715105757,
+    "NDCG@10":0.0773031041,
+    "HitRate@10":0.3425433338
+  },
+  {
+    "Model":"NeuMF (Scratch)",
+    "Paradigm":"Implicit",
+    "RMSE":null,
+    "Precision@10":0.0537669435,
+    "Recall@10":0.0779231861,
+    "NDCG@10":0.0778758302,
+    "HitRate@10":0.3456324041
+  },
+  {
+    "Model":"NeuMF (Pre-trained)",
+    "Paradigm":"Implicit",
+    "RMSE":null,
+    "Precision@10":0.0554830953,
+    "Recall@10":0.0774914473,
+    "NDCG@10":0.0801031366,
+    "HitRate@10":0.3470053077
+  },
+  {
+    "Model":"NeuMF-Explicit (MSE)",
+    "Paradigm":"Explicit",
+    "RMSE":0.9017466256,
+    "Precision@10":0.0303586759,
+    "Recall@10":0.036043711,
+    "NDCG@10":0.0424924679,
+    "HitRate@10":0.2035352737
+  }
+]

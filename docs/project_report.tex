@@ -1,0 +1,24 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,booktabs,amsmath,amssymb,hyperref,float,caption}
+\title{\textbf{A Rigorous Empirical Comparison of Popularity Baselines, Matrix Factorization (Biased SVD and Implicit ALS), and Neural Collaborative Filtering on MovieLens-1M}}
+\author{Advanced Artificial Intelligence --- Course Project Technical Report}
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+This report investigates Popularity (IMDB Weighted Rating), Matrix Factorization (Biased SVD and Implicit ALS), and Neural Collaborative Filtering (GMF, MLP, Scratch NeuMF, Pre-trained NeuMF, and Explicit NeuMF) on MovieLens-1M (1,000,209 ratings, 6,040 users, 3,883 movies) under a leak-free per-user 80/10/10 temporal split and full-catalog evaluation. Biased SVD (MF) achieves the best explicit rating accuracy (Test RMSE = 0.8935), whereas NeuMF (Pre-trained) achieves superior Top-10 ranking (Test NDCG@10 = 0.0801, Recall@10 = 0.0775).
+\end{abstract}
+\section{Problem and Data}
+MovieLens-1M contains 1,000,209 ratings across 6,040 users and 3,883 items (sparsity 95.74\%). See Figure~1 (`../results/figures/fig1_eda_distributions.png`).
+\section{Related Work}
+Covers Resnick et al. (1994), Koren et al. (2009), Hu et al. (2008), Rendle et al. (2009), He et al. (2017), and Ferrari Dacrema et al. (2019).
+\section{Methods}
+Formulates IMDB Weighted Rating, Biased Funk-SVD, Implicit ALS closed-form ridge updates, and dual-pathway GMF + MLP = Pre-trained NeuMF.
+\section{Implementation}
+Details vectorized tensor batching, binary-search negative sampling, and linear decomposition of the first MLP layer.
+\section{Evaluation and Error Analysis}
+See `../results/metrics.md`, `../results/error_analysis.md`, and Figures 3--8 in `../results/figures/`.
+\section{Conclusions}
+Supervision alignment (Implicit vs. Explicit) dominates architectural depth; pre-trained NeuMF and tuned Implicit ALS achieve Pareto-optimal accuracy and catalog coverage.
+\end{document}

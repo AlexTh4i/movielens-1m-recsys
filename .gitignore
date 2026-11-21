@@ -1,0 +1,19 @@
+# Dataset & Model Checkpoints (reproducible via src/download_data.py & src/train.py)
+data/ml-1m*
+saved_models/*.pt
+
+# Python / Testing / Jupyter
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# OS / Office / Packaging artifacts
+.DS_Store
+Thumbs.db
+~$*.docx
+~$*.pptx
+deliverables/

@@ -1,0 +1,478 @@
+{
+  "cohorts": [
+    {
+      "Model": "Popularity",
+      "Dimension": "Activity",
+      "Cohort": "Light Users (Bottom 25% - Cold-Start Proxy)",
+      "Users": 1480,
+      "Precision@10": 0.014189189299941063,
+      "Recall@10": 0.054988738149404526,
+      "NDCG@10": 0.031487587839365005,
+      "HitRate@10": 0.12567567825317383
+    },
+    {
+      "Model": "Popularity",
+      "Dimension": "Activity",
+      "Cohort": "Moderate Users (Middle 50%)",
+      "Users": 2899,
+      "Precision@10": 0.027319764718413353,
+      "Recall@10": 0.037615370005369186,
+      "NDCG@10": 0.034920334815979004,
+      "HitRate@10": 0.1924801617860794
+    },
+    {
+      "Model": "Popularity",
+      "Dimension": "Activity",
+      "Cohort": "Heavy Users (Top 25%)",
+      "Users": 1448,
+      "Precision@10": 0.07251381129026413,
+      "Recall@10": 0.03468695655465126,
+      "NDCG@10": 0.07951601594686508,
+      "HitRate@10": 0.4033149182796478
+    },
+    {
+      "Model": "Popularity",
+      "Dimension": "Taste",
+      "Cohort": "Gray-Sheep / Niche Users (Bottom 20% Pop)",
+      "Users": 1158,
+      "Precision@10": 0.03920552879571915,
+      "Recall@10": 0.028725046664476395,
+      "NDCG@10": 0.0440509170293808,
+      "HitRate@10": 0.2348877340555191
+    },
+    {
+      "Model": "Popularity",
+      "Dimension": "Taste",
+      "Cohort": "Mainstream Users (Top 80% Pop)",
+      "Users": 4669,
+      "Precision@10": 0.034225743263959885,
+      "Recall@10": 0.04441923275589943,
+      "NDCG@10": 0.04539813846349716,
+      "HitRate@10": 0.22617262601852417
+    },
+    {
+      "Model": "Biased SVD (MF)",
+      "Dimension": "Activity",
+      "Cohort": "Light Users (Bottom 25% - Cold-Start Proxy)",
+      "Users": 1480,
+      "Precision@10": 0.011148648336529732,
+      "Recall@10": 0.04257883131504059,
+      "NDCG@10": 0.027737395837903023,
+      "HitRate@10": 0.10135135054588318
+    },
+    {
+      "Model": "Biased SVD (MF)",
+      "Dimension": "Activity",
+      "Cohort": "Moderate Users (Middle 50%)",
+      "Users": 2899,
+      "Precision@10": 0.024767162278294563,
+      "Recall@10": 0.03394881635904312,
+      "NDCG@10": 0.03417045995593071,
+      "HitRate@10": 0.18213176727294922
+    },
+    {
+      "Model": "Biased SVD (MF)",
+      "Dimension": "Activity",
+      "Cohort": "Heavy Users (Top 25%)",
+      "Users": 1448,
+      "Precision@10": 0.06243094056844711,
+      "Recall@10": 0.031278304755687714,
+      "NDCG@10": 0.06807227432727814,
+      "HitRate@10": 0.37430939078330994
+    },
+    {
+      "Model": "Biased SVD (MF)",
+      "Dimension": "Taste",
+      "Cohort": "Gray-Sheep / Niche Users (Bottom 20% Pop)",
+      "Users": 1158,
+      "Precision@10": 0.03048359416425228,
+      "Recall@10": 0.021639425307512283,
+      "NDCG@10": 0.03604838252067566,
+      "HitRate@10": 0.20379965007305145
+    },
+    {
+      "Model": "Biased SVD (MF)",
+      "Dimension": "Taste",
+      "Cohort": "Mainstream Users (Top 80% Pop)",
+      "Users": 4669,
+      "Precision@10": 0.030713217332959175,
+      "Recall@10": 0.038909148424863815,
+      "NDCG@10": 0.04217950999736786,
+      "HitRate@10": 0.21075177192687988
+    },
+    {
+      "Model": "Implicit ALS (MF)",
+      "Dimension": "Activity",
+      "Cohort": "Light Users (Bottom 25% - Cold-Start Proxy)",
+      "Users": 1480,
+      "Precision@10": 0.030067570507526398,
+      "Recall@10": 0.11738739162683487,
+      "NDCG@10": 0.074649877846241,
+      "HitRate@10": 0.25135135650634766
+    },
+    {
+      "Model": "Implicit ALS (MF)",
+      "Dimension": "Activity",
+      "Cohort": "Moderate Users (Middle 50%)",
+      "Users": 2899,
+      "Precision@10": 0.037771645933389664,
+      "Recall@10": 0.06105077639222145,
+      "NDCG@10": 0.05277496576309204,
+      "HitRate@10": 0.27802690863609314
+    },
+    {
+      "Model": "Implicit ALS (MF)",
+      "Dimension": "Activity",
+      "Cohort": "Heavy Users (Top 25%)",
+      "Users": 1448,
+      "Precision@10": 0.07948895543813705,
+      "Recall@10": 0.044005487114191055,
+      "NDCG@10": 0.08567932993173599,
+      "HitRate@10": 0.47237569093704224
+    },
+    {
+      "Model": "Implicit ALS (MF)",
+      "Dimension": "Taste",
+      "Cohort": "Gray-Sheep / Niche Users (Bottom 20% Pop)",
+      "Users": 1158,
+      "Precision@10": 0.048704665154218674,
+      "Recall@10": 0.05460791662335396,
+      "NDCG@10": 0.06329866498708725,
+      "HitRate@10": 0.32037997245788574
+    },
+    {
+      "Model": "Implicit ALS (MF)",
+      "Dimension": "Taste",
+      "Cohort": "Mainstream Users (Top 80% Pop)",
+      "Users": 4669,
+      "Precision@10": 0.04555579274892807,
+      "Recall@10": 0.07522029429674149,
+      "NDCG@10": 0.06730355322360992,
+      "HitRate@10": 0.319340318441391
+    },
+    {
+      "Model": "GMF",
+      "Dimension": "Activity",
+      "Cohort": "Light Users (Bottom 25% - Cold-Start Proxy)",
+      "Users": 1480,
+      "Precision@10": 0.027432430535554886,
+      "Recall@10": 0.10629504173994064,
+      "NDCG@10": 0.06897657364606857,
+      "HitRate@10": 0.2337837815284729
+    },
+    {
+      "Model": "GMF",
+      "Dimension": "Activity",
+      "Cohort": "Moderate Users (Middle 50%)",
+      "Users": 2899,
+      "Precision@10": 0.044498104602098465,
+      "Recall@10": 0.07098554074764252,
+      "NDCG@10": 0.06505744159221649,
+      "HitRate@10": 0.31666091084480286
+    },
+    {
+      "Model": "GMF",
+      "Dimension": "Activity",
+      "Cohort": "Heavy Users (Top 25%)",
+      "Users": 1448,
+      "Precision@10": 0.10186464339494705,
+      "Recall@10": 0.05371508374810219,
+      "NDCG@10": 0.11184495687484741,
+      "HitRate@10": 0.4979281723499298
+    },
+    {
+      "Model": "GMF",
+      "Dimension": "Taste",
+      "Cohort": "Gray-Sheep / Niche Users (Bottom 20% Pop)",
+      "Users": 1158,
+      "Precision@10": 0.05863558128476143,
+      "Recall@10": 0.05601104721426964,
+      "NDCG@10": 0.0739104300737381,
+      "HitRate@10": 0.33074265718460083
+    },
+    {
+      "Model": "GMF",
+      "Dimension": "Taste",
+      "Cohort": "Mainstream Users (Top 80% Pop)",
+      "Users": 4669,
+      "Precision@10": 0.053373318165540695,
+      "Recall@10": 0.08053595572710037,
+      "NDCG@10": 0.07861427962779999,
+      "HitRate@10": 0.3431141674518585
+    },
+    {
+      "Model": "MLP",
+      "Dimension": "Activity",
+      "Cohort": "Light Users (Bottom 25% - Cold-Start Proxy)",
+      "Users": 1480,
+      "Precision@10": 0.023243244737386703,
+      "Recall@10": 0.08995494991540909,
+      "NDCG@10": 0.058717139065265656,
+      "HitRate@10": 0.204054057598114
+    },
+    {
+      "Model": "MLP",
+      "Dimension": "Activity",
+      "Cohort": "Moderate Users (Middle 50%)",
+      "Users": 2899,
+      "Precision@10": 0.044843047857284546,
+      "Recall@10": 0.0697837844491005,
+      "NDCG@10": 0.06569953262805939,
+      "HitRate@10": 0.3145912289619446
+    },
+    {
+      "Model": "MLP",
+      "Dimension": "Activity",
+      "Cohort": "Heavy Users (Top 25%)",
+      "Users": 1448,
+      "Precision@10": 0.10883978009223938,
+      "Recall@10": 0.05611575022339821,
+      "NDCG@10": 0.11953099071979523,
+      "HitRate@10": 0.5400552749633789
+    },
+    {
+      "Model": "MLP",
+      "Dimension": "Taste",
+      "Cohort": "Gray-Sheep / Niche Users (Bottom 20% Pop)",
+      "Users": 1158,
+      "Precision@10": 0.05932642146945,
+      "Recall@10": 0.04788496345281601,
+      "NDCG@10": 0.07118774205446243,
+      "HitRate@10": 0.34283247590065
+    },
+    {
+      "Model": "MLP",
+      "Dimension": "Taste",
+      "Cohort": "Mainstream Users (Top 80% Pop)",
+      "Users": 4669,
+      "Precision@10": 0.054251451045274734,
+      "Recall@10": 0.07737018167972565,
+      "NDCG@10": 0.07881982624530792,
+      "HitRate@10": 0.3424716293811798
+    },
+    {
+      "Model": "NeuMF (Scratch)",
+      "Dimension": "Activity",
+      "Cohort": "Light Users (Bottom 25% - Cold-Start Proxy)",
+      "Users": 1480,
+      "Precision@10": 0.028783783316612244,
+      "Recall@10": 0.11753379553556442,
+      "NDCG@10": 0.07294045388698578,
+      "HitRate@10": 0.24932432174682617
+    },
+    {
+      "Model": "NeuMF (Scratch)",
+      "Dimension": "Activity",
+      "Cohort": "Moderate Users (Middle 50%)",
+      "Users": 2899,
+      "Precision@10": 0.04322180151939392,
+      "Recall@10": 0.06944865733385086,
+      "NDCG@10": 0.0631292462348938,
+      "HitRate@10": 0.310451865196228
+    },
+    {
+      "Model": "NeuMF (Scratch)",
+      "Dimension": "Activity",
+      "Cohort": "Heavy Users (Top 25%)",
+      "Users": 1448,
+      "Precision@10": 0.10041435807943344,
+      "Recall@10": 0.05440381169319153,
+      "NDCG@10": 0.11244397610425949,
+      "HitRate@10": 0.514502763748169
+    },
+    {
+      "Model": "NeuMF (Scratch)",
+      "Dimension": "Taste",
+      "Cohort": "Gray-Sheep / Niche Users (Bottom 20% Pop)",
+      "Users": 1158,
+      "Precision@10": 0.056044913828372955,
+      "Recall@10": 0.05673396959900856,
+      "NDCG@10": 0.07299955934286118,
+      "HitRate@10": 0.34196892380714417
+    },
+    {
+      "Model": "NeuMF (Scratch)",
+      "Dimension": "Taste",
+      "Cohort": "Mainstream Users (Top 80% Pop)",
+      "Users": 4669,
+      "Precision@10": 0.05320197343826294,
+      "Recall@10": 0.08317850530147552,
+      "NDCG@10": 0.07908523827791214,
+      "HitRate@10": 0.34654101729393005
+    },
+    {
+      "Model": "NeuMF (Pre-trained)",
+      "Dimension": "Activity",
+      "Cohort": "Light Users (Bottom 25% - Cold-Start Proxy)",
+      "Users": 1480,
+      "Precision@10": 0.028986487537622452,
+      "Recall@10": 0.11271396279335022,
+      "NDCG@10": 0.07300946861505508,
+      "HitRate@10": 0.24391892552375793
+    },
+    {
+      "Model": "NeuMF (Pre-trained)",
+      "Dimension": "Activity",
+      "Cohort": "Moderate Users (Middle 50%)",
+      "Users": 2899,
+      "Precision@10": 0.04429113119840622,
+      "Recall@10": 0.07040012627840042,
+      "NDCG@10": 0.06606785953044891,
+      "HitRate@10": 0.31666091084480286
+    },
+    {
+      "Model": "NeuMF (Pre-trained)",
+      "Dimension": "Activity",
+      "Cohort": "Heavy Users (Top 25%)",
+      "Users": 1448,
+      "Precision@10": 0.10497237741947174,
+      "Recall@10": 0.05568784475326538,
+      "NDCG@10": 0.11545319110155106,
+      "HitRate@10": 0.5131215453147888
+    },
+    {
+      "Model": "NeuMF (Pre-trained)",
+      "Dimension": "Taste",
+      "Cohort": "Gray-Sheep / Niche Users (Bottom 20% Pop)",
+      "Users": 1158,
+      "Precision@10": 0.05863558128476143,
+      "Recall@10": 0.05695830658078194,
+      "NDCG@10": 0.07567881047725677,
+      "HitRate@10": 0.3376511335372925
+    },
+    {
+      "Model": "NeuMF (Pre-trained)",
+      "Dimension": "Taste",
+      "Cohort": "Mainstream Users (Top 80% Pop)",
+      "Users": 4669,
+      "Precision@10": 0.05470122769474983,
+      "Recall@10": 0.08258405327796936,
+      "NDCG@10": 0.08120045065879822,
+      "HitRate@10": 0.3493253290653229
+    },
+    {
+      "Model": "NeuMF-Explicit (MSE)",
+      "Dimension": "Activity",
+      "Cohort": "Light Users (Bottom 25% - Cold-Start Proxy)",
+      "Users": 1480,
+      "Precision@10": 0.01121621672064066,
+      "Recall@10": 0.043626125901937485,
+      "NDCG@10": 0.03204353153705597,
+      "HitRate@10": 0.09864864498376846
+    },
+    {
+      "Model": "NeuMF-Explicit (MSE)",
+      "Dimension": "Activity",
+      "Cohort": "Moderate Users (Middle 50%)",
+      "Users": 2899,
+      "Precision@10": 0.023835808038711548,
+      "Recall@10": 0.03398864343762398,
+      "NDCG@10": 0.03379881754517555,
+      "HitRate@10": 0.1773025244474411
+    },
+    {
+      "Model": "NeuMF-Explicit (MSE)",
+      "Dimension": "Activity",
+      "Cohort": "Heavy Users (Top 25%)",
+      "Users": 1448,
+      "Precision@10": 0.0629834234714508,
+      "Recall@10": 0.03240811452269554,
+      "NDCG@10": 0.07057762891054153,
+      "HitRate@10": 0.3632596731185913
+    },
+    {
+      "Model": "NeuMF-Explicit (MSE)",
+      "Dimension": "Taste",
+      "Cohort": "Gray-Sheep / Niche Users (Bottom 20% Pop)",
+      "Users": 1158,
+      "Precision@10": 0.03367875516414642,
+      "Recall@10": 0.024142347276210785,
+      "NDCG@10": 0.040604397654533386,
+      "HitRate@10": 0.2029360979795456
+    },
+    {
+      "Model": "NeuMF-Explicit (MSE)",
+      "Dimension": "Taste",
+      "Cohort": "Mainstream Users (Top 80% Pop)",
+      "Users": 4669,
+      "Precision@10": 0.02953523024916649,
+      "Recall@10": 0.038995470851659775,
+      "NDCG@10": 0.042960748076438904,
+      "HitRate@10": 0.20368386805057526
+    }
+  ],
+  "popularity_bias": [
+    {
+      "Model": "Popularity",
+      "Avg Rec Item Popularity": 1771.456100909559,
+      "Top-10% Head Share": 0.9780504547794748,
+      "Catalog Coverage": 0.029873808910636106,
+      "Unique Recommended Movies": 116,
+      "Gini Concentration": 0.9952882496036348,
+      "Zero-Hit User Rate (NDCG@10=0)": 0.7720954178822722
+    },
+    {
+      "Model": "Biased SVD (MF)",
+      "Avg Rec Item Popularity": 953.2413077055088,
+      "Top-10% Head Share": 0.6030719066414965,
+      "Catalog Coverage": 0.3177955189286634,
+      "Unique Recommended Movies": 1234,
+      "Gini Concentration": 0.9459508895003814,
+      "Zero-Hit User Rate (NDCG@10=0)": 0.7906298266689549
+    },
+    {
+      "Model": "Implicit ALS (MF)",
+      "Avg Rec Item Popularity": 1107.2724901321435,
+      "Top-10% Head Share": 0.749339282649734,
+      "Catalog Coverage": 0.3726500128766418,
+      "Unique Recommended Movies": 1447,
+      "Gini Concentration": 0.8838388488834712,
+      "Zero-Hit User Rate (NDCG@10=0)": 0.6804530633258967
+    },
+    {
+      "Model": "GMF",
+      "Avg Rec Item Popularity": 1349.3153938561868,
+      "Top-10% Head Share": 0.8519478290715634,
+      "Catalog Coverage": 0.326036569662632,
+      "Unique Recommended Movies": 1266,
+      "Gini Concentration": 0.9229553419854406,
+      "Zero-Hit User Rate (NDCG@10=0)": 0.6593444310966192
+    },
+    {
+      "Model": "MLP",
+      "Avg Rec Item Popularity": 1642.5894971683542,
+      "Top-10% Head Share": 0.9636004805217093,
+      "Catalog Coverage": 0.19340715941282513,
+      "Unique Recommended Movies": 751,
+      "Gini Concentration": 0.965101989322928,
+      "Zero-Hit User Rate (NDCG@10=0)": 0.6574566672387163
+    },
+    {
+      "Model": "NeuMF (Scratch)",
+      "Avg Rec Item Popularity": 1269.4218980607516,
+      "Top-10% Head Share": 0.829002917453235,
+      "Catalog Coverage": 0.3489569920164821,
+      "Unique Recommended Movies": 1355,
+      "Gini Concentration": 0.9136383370087855,
+      "Zero-Hit User Rate (NDCG@10=0)": 0.6543675991076026
+    },
+    {
+      "Model": "NeuMF (Pre-trained)",
+      "Avg Rec Item Popularity": 1339.5006349751159,
+      "Top-10% Head Share": 0.8480864939076712,
+      "Catalog Coverage": 0.3365954159155292,
+      "Unique Recommended Movies": 1307,
+      "Gini Concentration": 0.921175293766207,
+      "Zero-Hit User Rate (NDCG@10=0)": 0.6529946799382187
+    },
+    {
+      "Model": "NeuMF-Explicit (MSE)",
+      "Avg Rec Item Popularity": 1116.6564784623306,
+      "Top-10% Head Share": 0.6698815857216407,
+      "Catalog Coverage": 0.12850888488282255,
+      "Unique Recommended Movies": 499,
+      "Gini Concentration": 0.9838784356623798,
+      "Zero-Hit User Rate (NDCG@10=0)": 0.7964647331388365
+    }
+  ]
+}

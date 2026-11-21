@@ -1,0 +1,29 @@
+{
+  "n_ratings": 1000209,
+  "n_train": 797758,
+  "n_val": 99692,
+  "n_test": 102759,
+  "n_users": 6040,
+  "n_items": 3883,
+  "n_rated_items": 3706,
+  "density": 0.04264679797998748,
+  "sparsity": 0.9573532020200125,
+  "mean_rating": 3.581564426422119,
+  "std_rating": 1.1171019077301025,
+  "positive_rate_ge4": 0.5751607913945985,
+  "user_ratings_min": 20,
+  "user_ratings_median": 96.0,
+  "user_ratings_mean": 165.5975165562914,
+  "user_ratings_max": 2314,
+  "item_ratings_median": 123.5,
+  "item_ratings_max": 3428,
+  "rating_dist": {
+    "1": 56174,
+    "2": 107557,
+    "3": 261197,
+    "4": 348971,
+    "5": 226310
+  },
+  "share_ratings_of_top10pct_items": 0.4438112434501189,
+  "share_ratings_of_top20pct_items": 0.6516408070713221
+}
