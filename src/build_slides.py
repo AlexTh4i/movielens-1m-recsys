@@ -181,7 +181,40 @@ def generate_slide_charts(metrics_df: pd.DataFrame, bias_df: pd.DataFrame, out_d
     fig.savefig(p_nt, dpi=300, bbox_inches="tight", facecolor="white")
     plt.close(fig)
 
-    return {"ndcg": p_ndcg, "coverage": p_cov, "nontech": p_nt}
+    # Chart D: Friendly Non-Tech Bar Chart (Plain English Labels, Simple 4-Advisor Story)
+    nt_en_models = [
+        ("Popularity", "Popular\n(Baseline)"),
+        ("Biased SVD (MF)", "Biased SVD\n(Stars)"),
+        ("Implicit ALS (MF)", "Implicit ALS\n(Taste)"),
+        ("NeuMF (Pre-trained)", "Deep AI\n(NeuMF)"),
+    ]
+    labels_en = [lbl for _, lbl in nt_en_models]
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11.4, 3.9))
+    b1 = ax1.bar(labels_en, ndcgs, color=bar_colors, width=0.52, edgecolor="#0f172a", linewidth=1.0)
+    ax1.axhline(100, color="#64748b", ls="--", lw=1.2)
+    for bar, val in zip(b1, ndcgs):
+        ax1.text(bar.get_x() + bar.get_width() / 2, val + 4, f"{val:.1f}%", ha="center", va="bottom",
+                 fontsize=12.5, fontweight="bold", color="#0f172a")
+    ax1.tick_params(axis="x", labelsize=10.8)
+    ax1.set_ylim(0, 210)
+    ax1.set_ylabel("Top-10 Accuracy (Popular = 100%)", fontsize=11, fontweight="bold")
+    ax1.set_title("How Well Top-10 Picks Match Real Taste", fontsize=13.5, fontweight="bold", color="#0f172a", pad=10)
+
+    b2 = ax2.bar(labels_en, covs, color=bar_colors, width=0.52, edgecolor="#0f172a", linewidth=1.0)
+    for bar, val in zip(b2, covs):
+        ax2.text(bar.get_x() + bar.get_width() / 2, val + 35, f"{val:,.0f}\nmovies", ha="center", va="bottom",
+                 fontsize=12, fontweight="bold", color="#0f172a")
+    ax2.tick_params(axis="x", labelsize=10.8)
+    ax2.set_ylim(0, 1780)
+    ax2.set_ylabel("Distinct Movies Suggested (out of 3,883)", fontsize=11, fontweight="bold")
+    ax2.set_title("Catalog Variety (Discovering Hidden Gems)", fontsize=13.5, fontweight="bold", color="#0f172a", pad=10)
+
+    fig.tight_layout(w_pad=3.0)
+    p_nt_en = out_dir / "slide_fig_nontech_en.png"
+    fig.savefig(p_nt_en, dpi=300, bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+
+    return {"ndcg": p_ndcg, "coverage": p_cov, "nontech": p_nt, "nontech_en": p_nt_en}
 
 
 # =====================================================================
@@ -1278,9 +1311,442 @@ def build_nontech_deck(charts: dict[str, Path], out_dir: Path) -> Path:
 
 
 # =====================================================================
+# 3B. DECK 3: Non-Tech Friendly 5-Slide Deck (Plain English Storytelling)
+# =====================================================================
+def build_nontech_en_deck(charts: dict[str, Path], out_dir: Path) -> Path:
+    prs = Presentation()
+    prs.slide_width = Inches(13.333)
+    prs.slide_height = Inches(7.5)
+    blank = prs.slide_layouts[6]
+
+    # ---------- SLIDE 1: EVERYDAY NETFLIX HOOK ----------
+    s1 = prs.slides.add_slide(blank)
+    _set_bg(s1, NAVY)
+
+    acc = s1.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.65), Inches(1.10), Inches(0.12), Inches(3.25))
+    acc.fill.solid()
+    acc.fill.fore_color.rgb = TEAL
+    acc.line.fill.background()
+
+    t0 = s1.shapes.add_textbox(Inches(1.0), Inches(1.05), Inches(11.2), Inches(0.4))
+    p = t0.text_frame.paragraphs[0]
+    p.text = "PLAIN-ENGLISH AI EXPLAINER  ·  NO TECH JARGON REQUIRED"
+    p.font.name = "Calibri"
+    p.font.size = Pt(14)
+    p.font.bold = True
+    p.font.color.rgb = RGBColor(94, 234, 212)
+
+    t1 = s1.shapes.add_textbox(Inches(1.0), Inches(1.55), Inches(11.3), Inches(1.8))
+    tf = t1.text_frame
+    tf.word_wrap = True
+    p1 = tf.paragraphs[0]
+    p1.text = "How Does Netflix Know What Movie You'll Watch Next?"
+    p1.font.name = "Calibri"
+    p1.font.size = Pt(38)
+    p1.font.bold = True
+    p1.font.color.rgb = WHITE
+
+    p2 = tf.add_paragraph()
+    p2.text = "Comparing 3 smart ways computers recommend movies using 1 million real viewer ratings (MovieLens-1M)"
+    p2.font.name = "Calibri"
+    p2.font.size = Pt(19.5)
+    p2.font.color.rgb = RGBColor(203, 213, 225)
+    p2.space_before = Pt(12)
+
+    pills = [
+        ("1 Million", "Real 1–5★ Movie Ratings", "From 6,040 viewers across 3,883 movies", BLUE),
+        ("Fair Test", "No Peeking Ahead", "Learn 80% past watches → Predict 10% future", TEAL),
+        ("The Goal", "Pick 10 New Movies", "Unseen films each viewer will truly enjoy", AMBER),
+    ]
+    for idx, (num, lbl, sub, col) in enumerate(pills):
+        x = 1.0 + idx * 3.88
+        box = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(x), Inches(4.85), Inches(3.55), Inches(1.65))
+        box.adjustments[0] = 0.08
+        box.fill.solid()
+        box.fill.fore_color.rgb = SLATE_DARK
+        box.line.color.rgb = col
+        box.line.width = Pt(1.8)
+        ptf = box.text_frame
+        ptf.word_wrap = True
+        ptf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        q0 = ptf.paragraphs[0]
+        q0.text = num
+        q0.alignment = PP_ALIGN.CENTER
+        q0.font.name = "Calibri"
+        q0.font.size = Pt(27)
+        q0.font.bold = True
+        q0.font.color.rgb = WHITE
+        q1 = ptf.add_paragraph()
+        q1.text = lbl
+        q1.alignment = PP_ALIGN.CENTER
+        q1.font.name = "Calibri"
+        q1.font.size = Pt(14)
+        q1.font.bold = True
+        q1.font.color.rgb = RGBColor(147, 197, 253)
+        q2 = ptf.add_paragraph()
+        q2.text = sub
+        q2.alignment = PP_ALIGN.CENTER
+        q2.font.name = "Calibri"
+        q2.font.size = Pt(11.5)
+        q2.font.color.rgb = RGBColor(203, 213, 225)
+
+    _set_notes(
+        s1,
+        "PLAIN-ENGLISH SPEAKER SCRIPT (~40s):\n"
+        "Every time you open Netflix, it suggests 10 movies you haven't seen yet. How does a computer figure that out?\n"
+        "In this project, we tested 3 approaches on 1 million real ratings from 6,040 movie fans across nearly 3,900 films.\n"
+        "To make the test completely fair, we sorted each person's history by time—teaching the computer on their oldest 80% of movies "
+        "and hiding their newest 10% as a surprise future exam.",
+    )
+
+    # ---------- SLIDE 2: 3 MOVIE ADVISORS ----------
+    s2 = prs.slides.add_slide(blank)
+    _set_bg(s2, WHITE)
+    _add_top_bar(s2, "01 · How the System Thinks", "Three Movie Advisors: From Blockbusters to Deep AI", 2)
+
+    advisors = [
+        (
+            "🏆 Box-Office Advisor",
+            "Popularity Baseline",
+            SLATE_MID,
+            SLATE_LIGHT,
+            [
+                "Works like a 'Top 10 Most Popular' chart",
+                "Gives every viewer the exact same movie list",
+                "Ignores individual genres or personal habits",
+                "Serves as our minimum sanity benchmark",
+            ],
+            "Example: Always recommends Shawshank, Godfather...",
+        ),
+        (
+            "🎯 Taste-Pattern Advisor",
+            "Matrix Factorization (SVD & ALS)",
+            TEAL,
+            TEAL_SOFT,
+            [
+                "Discovers hidden taste groups from watch history",
+                "SVD excels at predicting exact 1–5★ star scores",
+                "ALS also notices skipped movies → stronger Top-10",
+                "Fast, lightweight, and widely used in industry",
+            ],
+            "Example: Loved Toy Story? Suggests animated hits",
+        ),
+        (
+            "🧠 Deep AI Advisor",
+            "Neural CF (GMF + MLP → NeuMF)",
+            RED,
+            RED_SOFT,
+            [
+                "Uses deep neural networks for subtle taste patterns",
+                "Merges 2 AI pathways: simple matching + deep layers",
+                "Trains each brain first, then fuses them together",
+                "Learns by comparing liked films vs. 4 unseen ones",
+            ],
+            "Example: Spots hidden gems for very specific tastes",
+        ),
+    ]
+    for idx, (title, sub, acc_col, bg_col, pts, ex_txt) in enumerate(advisors):
+        x = 0.55 + idx * 4.18
+        card = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(x), Inches(1.48), Inches(3.88), Inches(5.30))
+        card.adjustments[0] = 0.05
+        card.fill.solid()
+        card.fill.fore_color.rgb = bg_col
+        card.line.color.rgb = acc_col
+        card.line.width = Pt(1.5)
+
+        hdr = s2.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(x), Inches(1.48), Inches(3.88), Inches(0.92))
+        hdr.fill.solid()
+        hdr.fill.fore_color.rgb = acc_col
+        hdr.line.fill.background()
+        htf = hdr.text_frame
+        htf.margin_left = Inches(0.18)
+        htf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        hp1 = htf.paragraphs[0]
+        hp1.text = title
+        hp1.font.name = "Calibri"
+        hp1.font.size = Pt(18)
+        hp1.font.bold = True
+        hp1.font.color.rgb = WHITE
+        hp2 = htf.add_paragraph()
+        hp2.text = sub
+        hp2.font.name = "Calibri"
+        hp2.font.size = Pt(12)
+        hp2.font.color.rgb = RGBColor(241, 245, 249)
+
+        bt = s2.shapes.add_textbox(Inches(x + 0.16), Inches(2.55), Inches(3.56), Inches(3.2))
+        btf = bt.text_frame
+        btf.word_wrap = True
+        for bi, line_txt in enumerate(pts):
+            bp = btf.paragraphs[0] if bi == 0 else btf.add_paragraph()
+            bp.text = f"▸  {line_txt}"
+            bp.font.name = "Calibri"
+            bp.font.size = Pt(14.5)
+            bp.font.color.rgb = SLATE_DARK
+            bp.space_after = Pt(12)
+
+        pill = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(x + 0.16), Inches(5.95), Inches(3.56), Inches(0.65))
+        pill.adjustments[0] = 0.18
+        pill.fill.solid()
+        pill.fill.fore_color.rgb = WHITE
+        pill.line.color.rgb = acc_col
+        pill.line.width = Pt(1.0)
+        ftf = pill.text_frame
+        ftf.word_wrap = True
+        ftf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        fp0 = ftf.paragraphs[0]
+        fp0.text = ex_txt
+        fp0.alignment = PP_ALIGN.CENTER
+        fp0.font.name = "Calibri"
+        fp0.font.size = Pt(11.8)
+        fp0.font.bold = True
+        fp0.font.color.rgb = NAVY
+
+    _set_notes(
+        s2,
+        "PLAIN-ENGLISH SPEAKER SCRIPT (~50s):\n"
+        "Think of our 3 methods as 3 movie advisors competing head-to-head.\n"
+        "First, the Box-Office Advisor simply recommends the most popular classics to everyone—no personalization at all.\n"
+        "Second, our Taste-Pattern Advisor (SVD and ALS) learns hidden taste dimensions from what people rate—SVD focuses on guessing exact stars, "
+        "while ALS also learns from what you skipped.\n"
+        "Third, our Deep AI Advisor (Pre-trained NeuMF) blends two neural pathways trained separately and fused together so it can capture subtle, non-linear preferences.",
+    )
+
+    # ---------- SLIDE 3: WHO WON & THE PARADOX ----------
+    s3 = prs.slides.add_slide(blank)
+    _set_bg(s3, WHITE)
+    _add_top_bar(s3, "02 · Head-to-Head Results", "Deep AI (NeuMF) Ranks +77.5% Better & Unlocks 11× More Movies!", 3)
+
+    s3.shapes.add_picture(str(charts["nontech_en"]), Inches(0.65), Inches(1.40), width=Inches(12.0))
+
+    box = s3.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.65), Inches(5.55), Inches(12.0), Inches(1.38))
+    box.adjustments[0] = 0.08
+    box.fill.solid()
+    box.fill.fore_color.rgb = AMBER_SOFT
+    box.line.color.rgb = AMBER
+    box.line.width = Pt(1.6)
+    tf = box.text_frame
+    tf.word_wrap = True
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    tf.margin_left = Inches(0.25)
+    tf.margin_right = Inches(0.25)
+    p0 = tf.paragraphs[0]
+    p0.text = "💡  Surprising Paradox: Why did the best Star-Rating Predictor (SVD, 0.89★ avg error) lose at Top-10 picks?"
+    p0.font.name = "Calibri"
+    p0.font.size = Pt(15)
+    p0.font.bold = True
+    p0.font.color.rgb = RGBColor(146, 64, 14)
+    p1 = tf.add_paragraph()
+    p1.text = (
+        "Imagine an obscure film watched by only 5 hardcore fans who all rated it 5 stars. "
+        "Because SVD only looks at rated films, it thinks that movie is a masterpiece for everyone! "
+        "ALS and Deep AI (NeuMF) also notice the thousands of viewers who skipped it — avoiding the trap and picking far better movies."
+    )
+    p1.font.name = "Calibri"
+    p1.font.size = Pt(13.5)
+    p1.font.color.rgb = SLATE_DARK
+    p1.space_before = Pt(4)
+
+    _set_notes(
+        s3,
+        "PLAIN-ENGLISH SPEAKER SCRIPT (~60s):\n"
+        "Here is what happened on the future exam. Setting 'Most Popular' as our 100% baseline, Deep AI (Pre-trained NeuMF) jumped to 177.5%—a +77.5% boost in Top-10 ranking quality—while expanding movie variety from just 116 movies to over 1,300!\n"
+        "We also uncovered a fascinating insight: Biased SVD was the single best at predicting exact star ratings (0.8935 RMSE), yet trailed on Top-10 lists. "
+        "The reason is simple: without seeing what viewers choose NOT to watch, an explicit model gets fooled by obscure movies with a few 5-star reviews.",
+    )
+
+    # ---------- SLIDE 4: REAL VIEWER STORY (USER #5333) ----------
+    s4 = prs.slides.add_slide(blank)
+    _set_bg(s4, WHITE)
+    _add_top_bar(s4, "03 · Real-World Proof", "The Hardest Test: Niche Viewers (User #5333) & New Users", 4)
+
+    story = s4.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), Inches(1.48), Inches(6.25), Inches(5.38))
+    story.adjustments[0] = 0.05
+    story.fill.solid()
+    story.fill.fore_color.rgb = SLATE_LIGHT
+    story.line.color.rgb = BLUE
+    story.line.width = Pt(1.6)
+    stf = story.text_frame
+    stf.word_wrap = True
+    stf.vertical_anchor = MSO_ANCHOR.TOP
+    stf.margin_left = Inches(0.26)
+    stf.margin_right = Inches(0.22)
+    stf.margin_top = Inches(0.24)
+
+    sp0 = stf.paragraphs[0]
+    sp0.text = "👤  Real Case Study: Viewer #5333 (Very Niche Taste)"
+    sp0.font.name = "Calibri"
+    sp0.font.size = Pt(17.5)
+    sp0.font.bold = True
+    sp0.font.color.rgb = BLUE
+    sp0.space_after = Pt(10)
+
+    story_lines = [
+        ("Watch History:", "Only liked 8 lesser-known dramas (The Funeral, Firelight, Erin Brockovich...). Our hidden future test film: Return to Me (2000)."),
+        ("❌ Box-Office Advisor:", "Suggested Shawshank, Godfather, Schindler's List → 0/5 hits!"),
+        ("❌ Star-Rating SVD:", "Suggested obscure inflated-score films (Der bewegte Mann, An Actor's Revenge) → 0/5 hits!"),
+        ("✅ Deep AI (NeuMF):", "Predicted 'Return to Me (2000)' right at RANK #1!"),
+    ]
+    for h_txt, d_txt in story_lines:
+        ph = stf.add_paragraph()
+        ph.text = h_txt
+        ph.font.name = "Calibri"
+        ph.font.size = Pt(14.5)
+        ph.font.bold = True
+        ph.font.color.rgb = RED if "NeuMF" in h_txt else (NAVY if "Watch" in h_txt else SLATE_MID)
+        ph.space_before = Pt(6)
+
+        pd_p = stf.add_paragraph()
+        pd_p.text = d_txt
+        pd_p.font.name = "Calibri"
+        pd_p.font.size = Pt(13.5)
+        pd_p.font.color.rgb = SLATE_DARK
+        pd_p.space_after = Pt(6)
+
+    _add_accent_card(
+        s4,
+        7.12,
+        1.48,
+        5.66,
+        1.65,
+        "Light / New Viewers (Cold-Start)",
+        [
+            "With little history, deep layers alone can overfit",
+            "ALS stays steadiest — 2.4× better than Popularity!",
+        ],
+        accent=TEAL,
+        bg=TEAL_SOFT,
+        title_size=16.5,
+        body_size=14,
+    )
+    _add_accent_card(
+        s4,
+        7.12,
+        3.33,
+        5.66,
+        1.65,
+        "Niche Taste Viewers (Gray-Sheep)",
+        [
+            "Blockbusters completely miss specialized tastes",
+            "Deep AI (NeuMF) jumps +72% ahead of Popularity!",
+        ],
+        accent=RED,
+        bg=RED_SOFT,
+        title_size=16.5,
+        body_size=14,
+    )
+    _add_accent_card(
+        s4,
+        7.12,
+        5.18,
+        5.66,
+        1.68,
+        "Breaking the 'Filter Bubble'",
+        [
+            "Popularity recycles only 3% of the library (116 movies)",
+            "ALS & NeuMF help people discover 34–37% of the catalog",
+        ],
+        accent=BLUE,
+        bg=BLUE_SOFT,
+        title_size=16.5,
+        body_size=14,
+    )
+
+    _set_notes(
+        s4,
+        "PLAIN-ENGLISH SPEAKER SCRIPT (~50s):\n"
+        "To make these numbers concrete, meet Viewer #5333—a real person in MovieLens who prefers quiet, lesser-known dramas.\n"
+        "We hid the one movie they rated highly in the future: 'Return to Me (2000)'. "
+        "Both Popularity and Biased SVD missed completely, scoring 0 out of 5—while our Deep AI NeuMF nailed 'Return to Me' at Rank #1!\n"
+        "Overall, ALS shines for light users with sparse histories, while Pre-trained NeuMF dominates niche viewers and breaks the popularity filter bubble.",
+    )
+
+    # ---------- SLIDE 5: LIVE DEMO & 3 SIMPLE LESSONS ----------
+    s5 = prs.slides.add_slide(blank)
+    _set_bg(s5, WHITE)
+    _add_top_bar(s5, "04 · Live Demo & Key Takeaways", "Try It Live in 60 Seconds & Three Simple Lessons", 5)
+
+    _add_accent_card(
+        s5,
+        0.55,
+        1.48,
+        5.85,
+        5.38,
+        "🎬  Live Web App Tour (streamlit run demo/app.py)",
+        [
+            "Step 1: Choose any viewer ID (0–6,039) or pick 'Niche Viewer #5333' in one click",
+            "Step 2: Compare all 4 advisors side-by-side in real time (under 20 milliseconds)",
+            "Step 3: Check the green ✅ icons showing verified matches against the viewer's real future",
+            "Step 4: Switch to Tab 2 ('Benchmark Metrics') to explore accuracy & diversity charts interactively",
+        ],
+        accent=BLUE,
+        bg=BLUE_SOFT,
+        title_size=17,
+        body_size=14.5,
+    )
+
+    _add_accent_card(
+        s5,
+        6.72,
+        1.48,
+        6.06,
+        1.65,
+        "1. Pick the Right Tool for the Goal",
+        [
+            "Use Biased SVD to predict star ratings (0.89★ avg error), but use Implicit ALS or Deep AI to build Top-10 lists.",
+        ],
+        accent=RED,
+        bg=RED_SOFT,
+        title_size=16,
+        body_size=13.5,
+    )
+    _add_accent_card(
+        s5,
+        6.72,
+        3.33,
+        6.06,
+        1.65,
+        "2. Teamwork Inside AI Works Better",
+        [
+            "Training simple matching (GMF) and deep layers (MLP) first, then merging them (Pre-trained NeuMF), beats every single baseline.",
+        ],
+        accent=TEAL,
+        bg=TEAL_SOFT,
+        title_size=16,
+        body_size=13.5,
+    )
+    _add_accent_card(
+        s5,
+        6.72,
+        5.18,
+        6.06,
+        1.68,
+        "3. Variety Matters as Much as Accuracy",
+        [
+            "Smart AI doesn't just repeat blockbusters — it surfaces 11–12× more hidden gems across the library.",
+        ],
+        accent=PURPLE,
+        bg=PURPLE_SOFT,
+        title_size=16,
+        body_size=13.5,
+    )
+
+    _set_notes(
+        s5,
+        "PLAIN-ENGLISH SPEAKER SCRIPT (~40s -> LAUNCH LIVE DEMO):\n"
+        "To wrap up, three simple lessons: match the training goal to the task, combine pre-trained pathways for the best AI accuracy, "
+        "and always measure catalog variety so users don't get stuck watching the same 100 blockbusters.\n"
+        "Now let's switch over to our live Streamlit web app and watch all four advisors recommend movies in real time—thank you!",
+    )
+
+    out_path = out_dir / "presentation_nontech_en_5_slides.pptx"
+    prs.save(str(out_path))
+    return out_path
+
+
+# =====================================================================
 # 4. Main Entrypoint
 # =====================================================================
-def build_presentation(results_dir: Path = Path("results"), out_dir: Path = Path("docs")) -> tuple[Path, Path]:
+def build_presentation(results_dir: Path = Path("results"), out_dir: Path = Path("docs")) -> tuple[Path, Path, Path]:
     out_dir.mkdir(parents=True, exist_ok=True)
     eda = json.loads((results_dir / "eda_summary.json").read_text(encoding="utf-8"))
     metrics_df = pd.DataFrame(json.loads((results_dir / "metrics.json").read_text(encoding="utf-8")))
@@ -1290,26 +1756,24 @@ def build_presentation(results_dir: Path = Path("results"), out_dir: Path = Path
     charts = generate_slide_charts(metrics_df, bias_df, results_dir / "figures")
     p_acad = build_academic_deck(eda, metrics_df, bias_df, charts, out_dir)
     p_nontech = build_nontech_deck(charts, out_dir)
+    p_nontech_en = build_nontech_en_deck(charts, out_dir)
 
     md_summary = """# 5-Slide Presentation Decks
 
-Two complementary 5-slide decks have been generated in `docs/`:
+Three complementary 5-slide decks have been generated in `docs/`:
 
 1. **Academic Defense Deck (English — Submit & Present to Instructor):** `docs/presentation_5_slides.pptx` (+ `.pdf`)
-   - Clean, visual presentation design (large 14–40pt typography, KPI hero tiles, 1 dedicated chart per slide, built-in English + Vietnamese Speaker Notes).
-   - **Slide 1**: Hero Cover & Leak-Free Temporal Protocol (`1M Ratings · 80/10/10 · Full Ranking`).
-   - **Slide 2**: Three Collaborative Paradigms at a Glance (`Popularity` → `SVD & ALS` → `Pre-trained NeuMF`).
-   - **Slide 3**: Main Benchmark (`RMSE 0.8935` via Biased SVD vs. `NDCG@10 0.0801` / `+77.6%` via Pre-trained NeuMF) + Explicit-Implicit Paradox.
-   - **Slide 4**: Error & Diversity Analysis (`Accuracy vs. Coverage Frontier`, Cold-Start ALS, Gray-Sheep NeuMF, User `#5333` Rank #1 hit).
-   - **Slide 5**: Live Streamlit Demo Walkthrough & Key Takeaways.
-
-2. **Non-Technical Visual Explainer Deck (Vietnamese + English Terms — For Quick Mastery & General Audiences):** `docs/presentation_nontech_5_slides.pptx` (+ `.pdf`)
-   - Everyday Netflix analogies, zero complex formulas, User `#5333` story, 60-second Demo cheat sheet, and Top 3 Instructor Q&A answers.
+   - Clean, visual keynote design (14–40pt typography, KPI hero tiles, 1 dedicated chart per slide, built-in Speaker Notes).
+2. **Non-Technical Explainer Deck (Plain English — General Audience / Easy Storytelling):** `docs/presentation_nontech_en_5_slides.pptx` (+ `.pdf`)
+   - Everyday Netflix analogies, zero heavy equations, real User `#5333` story, live demo steps, and plain-English Speaker Notes.
+3. **Non-Technical Study & Defense Cheat Sheet (Vietnamese + English Terms):** `docs/presentation_nontech_5_slides.pptx` (+ `.pdf`)
+   - Quick 2-minute mastery guide with 4-step live demo walkthrough and Top 3 Instructor Q&A answers.
 """
     (out_dir / "presentation_5_slides.md").write_text(md_summary, encoding="utf-8")
-    print(f"Saved Academic Deck -> {p_acad}")
-    print(f"Saved Non-Tech Deck -> {p_nontech}")
-    return p_acad, p_nontech
+    print(f"Saved Academic Deck        -> {p_acad}")
+    print(f"Saved Non-Tech Deck (VI)   -> {p_nontech}")
+    print(f"Saved Non-Tech Deck (EN)   -> {p_nontech_en}")
+    return p_acad, p_nontech, p_nontech_en
 
 
 if __name__ == "__main__":
