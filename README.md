@@ -25,11 +25,14 @@ movie-recsys/
 ├── demo/
 │   └── app.py                   # Interactive Streamlit demo (side-by-side models & persona presets)
 ├── docs/
-│   ├── presentation_5_slides.pptx  # 5-slide project presentation deck
-│   ├── presentation_5_slides.md    # Companion slide outline
-│   ├── project_report.docx      # 15-20 page academic technical report (Word)
-│   ├── project_report.pdf       # Rendered PDF technical report
-│   └── project_report.tex       # Overleaf-ready LaTeX summary
+│   ├── presentation_5_slides.pptx          # 5-slide academic defense deck (English + Speaker Notes)
+│   ├── presentation_5_slides.pdf           # Rendered PDF of academic 5-slide deck
+│   ├── presentation_nontech_5_slides.pptx  # 5-slide non-technical explainer deck + Demo/Q&A guide
+│   ├── presentation_nontech_5_slides.pdf   # Rendered PDF of non-technical 5-slide deck
+│   ├── presentation_5_slides.md            # Companion slide outline
+│   ├── project_report.docx                 # 18-page academic technical report (Word)
+│   ├── project_report.pdf                  # Rendered PDF technical report
+│   └── project_report.tex                  # Overleaf-ready LaTeX summary
 ├── notebooks/
 │   └── 01_movielens_experiments.ipynb  # Interactive EDA & qualitative inspection notebook
 ├── results/

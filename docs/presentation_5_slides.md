@@ -1,26 +1,14 @@
-# 5-Slide Project Presentation Summary
+# 5-Slide Presentation Decks
 
-File generated: `docs/presentation_5_slides.pptx` (5 widescreen 16:9 slides)
+Two complementary 5-slide decks have been generated in `docs/`:
 
-## Slide 1: Movie Recommendation on MovieLens-1M — Problem & Temporal Protocol
-- **Objective**: Compare Popularity, Matrix Factorization (`Biased SVD` & `Implicit ALS`), and Neural Collaborative Filtering (`GMF`, `MLP`, `NeuMF`) across `RMSE`, `Precision@10`, `Recall@10`, and `NDCG@10`.
-- **Dataset**: MovieLens-1M (`1,000,209` ratings, `6,040` users, `3,883` movies, `95.74%` sparsity).
-- **Split**: Strict per-user chronological `80/10/10` split preventing future leakage.
+1. **Academic Defense Deck (English — Submit & Present to Instructor):** `docs/presentation_5_slides.pptx` (+ `.pdf`)
+   - Clean, visual presentation design (large 14–40pt typography, KPI hero tiles, 1 dedicated chart per slide, built-in English + Vietnamese Speaker Notes).
+   - **Slide 1**: Hero Cover & Leak-Free Temporal Protocol (`1M Ratings · 80/10/10 · Full Ranking`).
+   - **Slide 2**: Three Collaborative Paradigms at a Glance (`Popularity` → `SVD & ALS` → `Pre-trained NeuMF`).
+   - **Slide 3**: Main Benchmark (`RMSE 0.8935` via Biased SVD vs. `NDCG@10 0.0801` / `+77.6%` via Pre-trained NeuMF) + Explicit-Implicit Paradox.
+   - **Slide 4**: Error & Diversity Analysis (`Accuracy vs. Coverage Frontier`, Cold-Start ALS, Gray-Sheep NeuMF, User `#5333` Rank #1 hit).
+   - **Slide 5**: Live Streamlit Demo Walkthrough & Key Takeaways.
 
-## Slide 2: Methodology — Linear Matrix Factorization vs. Dual-Pathway NCF
-- **Popularity**: IMDB Weighted Rating (`q = 0.80`) + item mean baseline.
-- **Matrix Factorization**: Explicit Biased SVD (MSE + L2) vs. Implicit ALS (Hu et al., 2008 confidence-weighted ridge regression).
-- **Neural CF**: GMF + MLP (`64 -> 32 -> 16`) fused into **Pre-trained NeuMF** (`alpha = 0.5`) with 4:1 negative sampling and BCE loss.
-
-## Slide 3: Quantitative Results & Ablation Study
-- **Best Rating Predictor**: `Biased SVD (MF)` (`RMSE = 0.8935`).
-- **Best Top-10 Ranker**: `NeuMF (Pre-trained)` (`NDCG@10 = 0.0801`, `Recall@10 = 0.0775`).
-- **Explicit-Implicit Paradox**: Demonstrates why low RMSE does not imply strong Top-N ranking without negative feedback.
-
-## Slide 4: Error Analysis — Cold-Start, Gray-Sheep Users & Popularity Bias
-- Disaggregates performance across **Light / Moderate / Heavy** activity groups and **Gray-Sheep (Niche) vs. Mainstream** tastes.
-- Quantifies the **Accuracy vs. Catalog Coverage** frontier (`Popularity` coverage `2.99%` vs. `NeuMF (Pre-trained)` `33.7%`).
-
-## Slide 5: Interactive Streamlit Demo, Conclusions & Future Work
-- Live real-time demonstration (`streamlit run demo/app.py`) with persona presets, Test-set hit verification, and pairwise Jaccard diversity.
-- Extensions to Sequential RecSys (`SASRec`), Graph CF (`LightGCN`), and Transformer content embeddings.
+2. **Non-Technical Visual Explainer Deck (Vietnamese + English Terms — For Quick Mastery & General Audiences):** `docs/presentation_nontech_5_slides.pptx` (+ `.pdf`)
+   - Everyday Netflix analogies, zero complex formulas, User `#5333` story, 60-second Demo cheat sheet, and Top 3 Instructor Q&A answers.
